@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-7.5" style="border: 1px solid grey;padding: 10px">
+        <div id="memory_board">
+            <div [innerHTML]="inner_html_content[i]" [style.background]="background[i]"(click)="flipTile(memory_array,i)" id="i" *ngFor="let val of memory_array; index as i">
+            </div>
+          </div>
+    </div>
+    <div class="col-sm-4.5" style="border: 1px solid grey;padding: 10px">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Game Started on:</th>
+                    <th>12:12</th>
+                </tr>
+                <tr>
+                    <th>Game Status:</th>
+                    <th>{{status}}</th>
+                </tr>
+                <tr>
+                    <th>Timer:</th>
+                    <th>{{counter}}</th>
+                </tr>
+                <tr>
+                  <audio id="cheers" controls="none" preload="auto" style="display:none">
+                    <source src="assets/sound/cheers.mp3" type="audio/mp3">
+                    </audio>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

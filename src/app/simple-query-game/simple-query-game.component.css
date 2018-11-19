@@ -1,0 +1,20 @@
+
+
+  .example-selected-value {
+    margin: 15px 0;
+  }
+
+  .example-card {
+    max-width: 1200px;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  

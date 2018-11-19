@@ -1,0 +1,44 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" opened mode="side">
+        <game-list (SelectGame)="onSelectGame($event)" [games]="games"></game-list>
+
+    </mat-drawer>
+
+    <!--
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+    </div>
+    -->
+    <game-detail (generatePlayingId)="onGeneratePlayingId($event)" [startGameComponent]="startGameComponent" [newGamePlay]="newGamePlay" [gamePlayingId]="gamePlayingId" *ngIf="selectedGames" [game]="selectedGames"></game-detail>
+
+
+  </mat-drawer-container>
+
+
+
+<mat-grid-list style="background-color: black" cols="4" rowHeight="100px" gutterSize="3px">
+  <mat-grid-tile style="background-color:white"  [colspan]=1 [rowspan]=1>
+      <button style="text-align: center;height: 100%;width: 100%;" (click)="OpenDashboard()" mat-raised-button color="primary"> View Dashboard </button>
+  </mat-grid-tile>
+  <mat-grid-tile style="background-color:white"  [colspan]=3 [rowspan]=1>
+
+      <div class="container-fluid" >
+        <div class="row">
+          <div class="col-sm-12">
+              <mat-form-field style="height: 100%;width: 100%;" appearance="legacy" class="example-full-width">
+                <input styele="text-align:center" [(ngModel)]="question"  matInput placeholder="Add your query">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12">
+              <button (click)="AskQuery()" style="text-align: center;height: 100%;width: 100%;" mat-raised-button color="primary"> Ask Query </button>
+          </div>
+        </div>
+      </div>
+
+
+  </mat-grid-tile>
+</mat-grid-list>
+
+

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Enter a new Question. {{data.myVar}}</h1>
+<div> Question No.: </div>
+<div mat-dialog-content>
+  <form class="example-form" >
+    <mat-form-field class="example-full-width">
+        <textarea [(ngModel)]="QuestionObject.QuestionName" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Your New Question!!"></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="QuestionObject.Options[0]" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Option 1.">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="QuestionObject.Options[1]" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Option 2.">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="QuestionObject.Options[2]" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Option 3.">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="QuestionObject.Options[3]" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Option 4.">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-select [(value)]="QuestionObject.Answer" placeholder="Select The correct Answer.">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button  (click)="onAddClick(QuestionObject)" cdkFocusInitial>Add</button>
+</div>

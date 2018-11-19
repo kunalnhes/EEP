@@ -1,0 +1,8 @@
+<mat-action-list class="example-list">
+
+    <mat-divider></mat-divider>
+  <button mat-list-item (click)="onSelectGame(game)"  *ngFor="let game of games">
+    {{game.name}}
+    <mat-divider></mat-divider>
+  </button>
+</mat-action-list>

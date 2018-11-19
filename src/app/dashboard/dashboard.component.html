@@ -1,0 +1,109 @@
+<div mat-dialog-title>
+    <h1 mat-dialog-title>Here is the latest dashboard {{data.myVar}}</h1>
+</div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+          <mat-card style="width: 100%;height: 570px" class="example-card">
+              <mat-card-header>
+                <mat-card-title>All Games</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                  <mat-form-field>
+                      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+
+                    <div class="mat-elevation-z8">
+                      <table mat-table [dataSource]="dataSource2" matSort>
+
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Game ID </th>
+                          <td mat-cell style="cursor: default;" (click)="GameClicked(row.id)" *matCellDef="let row">{{row.id}} </td>
+                        </ng-container>
+
+                        <!-- Progress Column -->
+                        <ng-container matColumnDef="StartTime">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date </th>
+                          <td mat-cell *matCellDef="let row"> {{row.StartTime}}% </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="GameName">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Game Name </th>
+                          <td mat-cell *matCellDef="let row"> {{row.GameName}} </td>
+                        </ng-container>
+
+                        <!-- Color Column -->
+                        <ng-container matColumnDef="PlayersJoined">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Players </th>
+                          <td mat-cell *matCellDef="let row" > {{row.PlayersJoined.length}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                        </tr>
+                      </table>
+
+                      <mat-paginator [pageSizeOptions]="[6, 4, 2, 5,3]"></mat-paginator>
+                    </div>
+              </mat-card-content>
+            </mat-card>
+      </div>
+      <div class="col-sm-4">
+        <div class="row" *ngIf="showDetails">
+            <mat-card style="width: 100%;height: 360px" class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Assigment {{clickedGame.id}} Details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <b>Game id: </b> {{clickedGame.id}}; <br>
+                  <b>Players Joined:</b> {{clickedGame.PlayersJoined}};<br>
+                  <b>Game Status: </b>{{clickedGame.GameStatus}};
+                  <b>Winning Criteria:</b> {{clickedGame.WinningCriteria}};<br>
+                  <b>EndTime: </b>{{clickedGame.EndTime}};<br>
+                  <b>StartTime: </b>{{clickedGame.StartTime}};<br>
+                  <b>GameName: </b>{{games[(+clickedGame.GameName)-1].name}};<br>
+                  <b>Winner List:  </b>
+                    <div *ngIf="clickedGame.WinnerList != undefined;else elseBlock">
+                        <div class="alert alert-success" *ngIf="clickedGame.WinnerList.length>0;else elseBlock">
+                            <p *ngIf="clickedGame.WinnerList.length>0;"><b>First:</b>{{clickedGame.PlayersJoined[clickedGame.WinnerList[0]]}}</p>
+                            <p *ngIf="clickedGame.WinnerList.length>1"><b>Second:</b>{{clickedGame.PlayersJoined[clickedGame.WinnerList[1]]}}</p>
+                          </div>
+                    </div>
+
+                  <ng-template #elseBlock>
+                    <div class="alert alert-info">
+                        Not Available
+                    </div>
+                  </ng-template>
+                </mat-card-content>
+
+                <mat-card-actions align="end">
+                  <button  (click)="FindWinner(clickedGame)" mat-button>Check Winner & end the game.</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        <br>
+        <div class="row">
+            <mat-card style="width: 100%;height: 230px" class="example-card">
+                <mat-card-header>
+                  <mat-card-title>EEP Statistics</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <b>Total Games: </b> {{results.length}}; <br>
+                  <b>Total InProgress Game:</b> {{inProgressCount}};<br>
+                  <b>Total Completed Games: </b>{{completedCount}};<br>
+                  <b>Total Not started Game:</b> {{notStartedCount}};<br>
+                  <b>EEP Version: </b>Beta TEsting version<br>
+                  <b>Admin Name: </b>Infosys
+                </mat-card-content>
+              </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div  align="end" mat-dialog-actions>
+      <button mat-button mat-dialog-close>close</button>
+    </div>

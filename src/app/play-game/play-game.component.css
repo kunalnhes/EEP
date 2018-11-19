@@ -1,0 +1,37 @@
+.example-card {
+    width: 250px;
+  }
+  .example-card3 {
+    width: 300px;
+  }
+  .example-card2 {
+    width: 390px;
+  }
+  .example-form {
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  table {
+    width: 370px;
+  }
+  td,th{
+    height: 10px;
+  }
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .inventory-body {
+    position: fixed;
+    min-width: 100%;
+    background-image: url("/assets/image/bg2.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-size: cover;
+    }

@@ -1,0 +1,23 @@
+  <mat-card class="example-card">
+      <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{playId}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+          Total Players Joined: {{playersJoined}}
+          <div *ngIf="quizGame">
+            <button (click)="AddQuestion()" mat-raised-button color="primary"> Add Question</button>
+            <div>
+              Total Questions Added: {{questionsArray.length}}
+            </div>
+          </div>
+          <div *ngIf="simpleQueryGame">
+            <button (click)="AskQuestion()" mat-raised-button color="primary"> Ask Question</button>
+          </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="startGame(newGamePlay)" mat-raised-button color="primary">Start Game</button>
+        <button (click)="endGame(newGamePlay)" mat-raised-button>End Game</button>
+      </mat-card-actions>
+    </mat-card>

@@ -1,0 +1,22 @@
+<div [ngSwitch]="gameId" *ngIf="startGame">
+  <h4>Hi {{playerId}}</h4>
+  <app-simple-query-game *ngSwitchCase='1' [gamePlayingId]="gamePlayingId" (gameComplete)="onGameComplete($event)"></app-simple-query-game>
+
+  <card-flip *ngSwitchCase='2'  (gameComplete)="onGameComplete($event)"></card-flip>
+
+  <app-quiz-question *ngSwitchCase='3' [gamePlayingId]="gamePlayingId" (gameComplete)="onGameComplete($event)"></app-quiz-question>
+  
+  <app-puzzlegame *ngSwitchCase='4'  (gameComplete)="onGameComplete($event)"></app-puzzlegame>
+  <div *ngSwitchCase='404'>
+    You have completed the game successfully. Results is with the admin contact him.
+  </div>
+  <div *ngSwitchDefault>
+    Some Error Occured
+  </div>
+</div>
+
+<div *ngIf="!startGame">
+
+    Game not yet started wait a while!!!!!!!!!
+
+</div>

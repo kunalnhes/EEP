@@ -1,0 +1,123 @@
+<body  class="inventory-body">
+
+  <div class="container align-self-center"style="width: 1200px;height: 500px;margin-top:75px ;">
+    <div class=" mat-elevation-z8 row " style="padding: 20px; margin:auto;width: 1030px;height: 450px">
+
+                    <div class="col-sm-3" style="margin: 0px">
+                        <mat-card class="example-card">
+                            <mat-card-header>
+                                <mat-card-title>Assignment</mat-card-title>
+                                <mat-card-subtitle>Use id received from admin or Id's available in the right.</mat-card-subtitle>
+                              </mat-card-header>
+                          <mat-card-content style="height: 273px;">
+                                <br>
+                              <form #form="ngForm" (ngSubmit)="checkGameId(form.value)" class="example-form" >
+                                  <mat-form-field class="example-full-width">
+                                      <input [(ngModel)]="idAdded" [ngModelOptions]="{standalone: true}" matInput name="gameId" placeholder="Enter the Assignment Id!!">
+                                  </mat-form-field >
+                                  <div>
+                                      <button mat-raised-button type="submit" cdkFocusInitial>Search Assignment</button>
+                                    </div>
+                              </form>
+                              <br>
+                              <form *ngIf="idMatched" #form="ngForm"  (ngSubmit)="enterGame(form.value)" class="example-form">
+                                  <mat-form-field class="example-full-width">
+                                      <input [(ngModel)]="playerId"  [ngModelOptions]="{standalone: true}" matInput  name="gameId" placeholder="Enter Your Unique Name!!">
+                                  </mat-form-field>
+                                  <div >
+                                      <button mat-raised-button type="submit" >Enter Assignment Page.</button>
+                                    </div>
+                              </form>
+                          </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-sm-4" style="margin-left: 15px">
+                        <mat-card class="example-card2">
+                            <mat-card-header>
+                                <mat-card-title>Active Assignments</mat-card-title>
+                            </mat-card-header>
+                          <mat-card-content style="height: 253px;">
+
+                                <table *ngIf="results.length>0;else noGameTemplate" mat-table [dataSource]="dataSource2">
+
+                                  <!-- ID Column -->
+                                  <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> Assignment ID </th>
+                                    <td mat-cell style="cursor: default;"  *matCellDef="let row">{{row.id}} </td>
+                                  </ng-container>
+
+
+                                  <!-- Name Column -->
+                                  <ng-container matColumnDef="GameName">
+                                    <th mat-header-cell *matHeaderCellDef> Assignment Name </th>
+                                    <td mat-cell *matCellDef="let row"> {{games[row.GameName-1].name}} </td>
+                                  </ng-container>
+
+                                  <!-- Players Joined Column -->
+                                  <ng-container matColumnDef="PlayersJoined">
+                                    <th mat-header-cell *matHeaderCellDef> Total Players </th>
+                                    <td mat-cell *matCellDef="let row" > {{row.PlayersJoined.length}} </td>
+                                  </ng-container>
+
+                                  <!-- Color Column -->
+                                  <ng-container matColumnDef="GameStatus">
+                                    <th mat-header-cell *matHeaderCellDef> Assignment Status </th>
+                                    <td mat-cell *matCellDef="let row" > {{row.GameStatus}} </td>
+                                  </ng-container>
+
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                                  </tr>
+                                </table>
+
+                                <ng-template #noGameTemplate>
+                                    <div class="alert alert-danger">
+                                        No Assignment has been generated yet. Contact the admin.
+                                    </div>
+                                  </ng-template>
+                          </mat-card-content>
+                          <mat-card-actions>
+
+                                <mat-paginator  [pageSizeOptions]="[4]"></mat-paginator>
+                          </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    <div class="col-sm-3" style="margin-left: 75px">
+                            <mat-card class="example-card3" style="height: 400px;">
+                                <mat-card-header>
+                                    <mat-card-title>Leader board</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <div style="overflow-y: scroll;width:100%;height: 335px">
+                                        <mat-accordion *ngIf="endedGameResult.length>0;else noEndedGameTemplate">
+                                            <mat-expansion-panel *ngFor="let game of endedGameResult">
+                                                <mat-expansion-panel-header>
+                                                    <mat-panel-title>
+                                                        {{games[+(game.GameName)-1].name}} {{game.id}}
+                                                    </mat-panel-title>
+                                                </mat-expansion-panel-header>
+                                                <div class="alert alert-success" *ngIf="game.WinnerList.length>0;else elseBlock">
+                                                  <p *ngIf="game.WinnerList.length>0"><b>First:</b>{{game.PlayersJoined[game.WinnerList[0]]}}</p>
+                                                  <p *ngIf="game.WinnerList.length>1"><b>Second:</b>{{game.PlayersJoined[game.WinnerList[1]]}}</p>
+                                                  <p *ngIf="game.WinnerList.length>2"><b>Third:</b>{{game.PlayersJoined[game.WinnerList[2]]}}</p>
+                                                </div>
+                                                <ng-template #elseBlock>
+                                                  <div class="alert alert-info">
+                                                      Not Available For this game
+                                                  </div>
+                                                </ng-template>
+                                            </mat-expansion-panel>
+                                        </mat-accordion>
+                                        <ng-template #noEndedGameTemplate>
+                                            <div class="alert alert-danger">
+                                                Not Available For this game
+                                            </div>
+                                          </ng-template>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                    </div>
+    </div>
+</div>
+
+</body>
